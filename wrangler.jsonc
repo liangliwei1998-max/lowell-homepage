@@ -1,9 +1,18 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "lowell-homepage",
+  "main": "src/worker.js",
   "compatibility_date": "2026-09-25",
   "assets": {
     "directory": ".",
+    "binding": "ASSETS",
     "not_found_handling": "single-page-application"
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "lowell-homepage-db",
+      "database_id": "bf02922c-7e71-4ce4-829b-1d5292fd87a4"
+    }
+  ]
 }

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据 · 候选人样本（脱敏） · Lowell 的博客</title>
+<meta name="description" content="招聘候选人脱敏数据样本，仅保留匿名画像字段。">
+<style>
+  :root{
+    --bg:#faf9f6;--bg-soft:#f3f1ec;--fg:#2b2b28;--muted:#85837c;
+    --line:#e7e4dd;--accent:#2f6b4f;--accent-soft:#e7efe9;--card:#ffffff;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{--bg:#1c1c1a;--bg-soft:#232320;--fg:#e8e6e0;--muted:#9a988f;
+      --line:#2e2d2a;--accent:#6fa88a;--accent-soft:#24332b;--card:#242422;}
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+  a{color:var(--accent);text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+  header{padding:40px 0 20px}
+  .crumb{font-size:.85rem;color:var(--muted);margin-bottom:10px}
+  h1{font-family:Georgia,"Songti SC","SimSun",serif;font-size:1.7rem;font-weight:700}
+  .sub{color:var(--muted);margin-top:8px;font-size:.95rem}
+
+  section{padding:28px 0}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+  .card .n{font-size:1.8rem;font-weight:700;color:var(--accent)}
+  .card .l{color:var(--muted);font-size:.85rem;margin-top:4px}
+
+  .bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+  .bar-group h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:12px;font-weight:600}
+  .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.9rem}
+  .bar-row .k{width:64px;flex-shrink:0;color:var(--fg)}
+  .bar-row .track{flex:1;background:var(--bg-soft);border-radius:100px;height:14px;overflow:hidden}
+  .bar-row .fill{height:100%;background:var(--accent);border-radius:100px;opacity:.75}
+  .bar-row .c{width:34px;text-align:right;color:var(--muted);font-size:.82rem}
+
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+  .toolbar input,.toolbar select{
+    background:var(--card);border:1px solid var(--line);color:var(--fg);
+    border-radius:8px;padding:8px 12px;font-size:.92rem;outline:none}
+  .toolbar input:focus,.toolbar select:focus{border-color:var(--accent)}
+  .toolbar input{flex:1;min-width:200px}
+  .toolbar select{min-width:130px}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{padding:11px 12px;text-align:left;font-size:.9rem;border-bottom:1px solid var(--line)}
+  th{background:var(--bg-soft);color:var(--muted);font-weight:600;font-size:.8rem;letter-spacing:.02em}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:var(--bg-soft)}
+  .empty{padding:40px;text-align:center;color:var(--muted)}
+
+  .pager{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px;font-size:.9rem}
+  .pager button{background:var(--card);border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:.9rem}
+  .pager button:disabled{opacity:.4;cursor:not-allowed}
+  .pager .info{color:var(--muted)}
+
+  footer{padding:30px 0 50px;color:var(--muted);font-size:.85rem;text-align:center}
+  @media (max-width:600px){table{font-size:.8rem}th,td{padding:8px 8px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="crumb"><a href="/">← 返回博客</a></div>
+    <h1>招聘候选人数据样本</h1>
+    <p class="sub">本地招聘系统导出的脱敏数据（前 50 条）。姓名、电话、邮箱、简历、出生年月等隐私字段已全部剔除，仅保留匿名画像字段。数据存在 Cloudflare D1 数据库，经 Worker 接口查询。</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="cards">
+      <div class="card"><div class="n" id="stat-total">—</div><div class="l">候选人总数</div></div>
+      <div class="card"><div class="n" id="stat-city">—</div><div class="l">城市数</div></div>
+      <div class="card"><div class="n" id="stat-edu">—</div><div class="l">学历层次</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="bars">
+      <div class="bar-group">
+        <h3>学历分布</h3>
+        <div id="edu-bars"></div>
+      </div>
+      <div class="bar-group">
+        <h3>城市分布</h3>
+        <div id="city-bars"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="toolbar">
+      <input type="text" id="q" placeholder="搜索职位 / 技能标签…">
+      <select id="city"><option value="">全部城市</option></select>
+      <select id="education"><option value="">全部学历</option></select>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>性别</th><th>年龄</th><th>学历</th><th>城市</th>
+          <th>年限</th><th>期望职位</th><th>期望薪资</th><th>求职状态</th><th>来源</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="pager">
+      <button id="prev">上一页</button>
+      <span class="info" id="pager-info">—</span>
+      <button id="next">下一页</button>
+    </div>
+  </section>
+
+</main>
+
+<footer><div class="wrap">© 2026 Lowell · 数据已脱敏，仅作技术演示</div></footer>
+
+<script>
+const state = { q:"", city:"", education:"", page:1, pageSize:20 };
+
+const $ = id => document.getElementById(id);
+const gender = g => g === "male" ? "男" : g === "female" ? "女" : "—";
+const num = v => (v === null || v === undefined || v === "" || v === 0) ? "—" : v;
+const salary = (min,max) => {
+  if ((!min || min===0) && (!max || max===0)) return "—";
+  if (min && max) return `${min}~${max}`;
+  return min ? `≥${min}` : `≤${max}`;
+};
+
+async function loadStats(){
+  try{
+    const r = await fetch("/api/stats");
+    const d = await r.json();
+    $("stat-total").textContent = d.total;
+    $("stat-city").textContent = d.city.length;
+    $("stat-edu").textContent = d.education.length;
+
+    const maxC = Math.max(...d.education.map(x=>x.c), ...d.city.map(x=>x.c), 1);
+    const bar = (arr) => arr.map(x => {
+      const w = Math.round(x.c / maxC * 100);
+      return `<div class="bar-row"><span class="k">${x.k||"未知"}</span>
+        <span class="track"><span class="fill" style="width:${w}%"></span></span>
+        <span class="c">${x.c}</span></div>`;
+    }).join("");
+    $("edu-bars").innerHTML = bar(d.education);
+    $("city-bars").innerHTML = bar(d.city);
+
+    // 填充筛选下拉
+    $("city").innerHTML = '<option value="">全部城市</option>' + d.city.map(x=>`<option value="${x.k}">${x.k} (${x.c})</option>`).join("");
+    $("education").innerHTML = '<option value="">全部学历</option>' + d.education.map(x=>`<option value="${x.k}">${x.k} (${x.c})</option>`).join("");
+  }catch(e){ console.error(e); }
+}
+
+async function loadRows(){
+  const p = new URLSearchParams({ page:state.page, pageSize:state.pageSize });
+  if(state.q) p.set("q", state.q);
+  if(state.city) p.set("city", state.city);
+  if(state.education) p.set("education", state.education);
+  try{
+    const r = await fetch("/api/candidates?" + p.toString());
+    const d = await r.json();
+    const tbody = $("rows");
+    if(!d.data.length){
+      tbody.innerHTML = '<tr><td colspan="10" class="empty">没有匹配的记录</td></tr>';
+    }else{
+      tbody.innerHTML = d.data.map(x => `<tr>
+        <td>${x.id}</td><td>${gender(x.gender)}</td><td>${num(x.age)}</td>
+        <td>${x.education||"—"}</td><td>${x.city||"—"}</td><td>${num(x.work_years)}</td>
+        <td>${x.expected_position||"—"}</td><td>${salary(x.salary_min,x.salary_max)}</td>
+        <td>${x.work_status||"—"}</td><td>${x.source||"—"}</td></tr>`).join("");
+    }
+    const totalPages = Math.max(1, Math.ceil(d.total / d.pageSize));
+    $("pager-info").textContent = `第 ${d.page} / ${totalPages} 页 · 共 ${d.total} 条`;
+    $("prev").disabled = d.page <= 1;
+    $("next").disabled = d.page >= totalPages;
+  }catch(e){ console.error(e); }
+}
+
+let debounce;
+$("q").addEventListener("input", e => {
+  clearTimeout(debounce);
+  debounce = setTimeout(() => { state.q = e.target.value.trim(); state.page = 1; loadRows(); }, 300);
+});
+$("city").addEventListener("change", e => { state.city = e.target.value; state.page = 1; loadRows(); });
+$("education").addEventListener("change", e => { state.education = e.target.value; state.page = 1; loadRows(); });
+$("prev").addEventListener("click", () => { state.page--; loadRows(); });
+$("next").addEventListener("click", () => { state.page++; loadRows(); });
+
+loadStats();
+loadRows();
+</script>
+</body>
+</html>

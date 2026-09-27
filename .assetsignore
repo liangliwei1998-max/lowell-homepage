@@ -1,9 +1,13 @@
 .git
 .wrangler
 node_modules
+src
 wrangler.jsonc
 .gitignore
 .assetsignore
 package.json
 package-lock.json
+schema.sql
+seed.sql
+candidates.json
 .DS_Store

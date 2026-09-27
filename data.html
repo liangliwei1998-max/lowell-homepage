@@ -7,65 +7,77 @@
 <meta name="description" content="招聘候选人脱敏数据样本，仅保留匿名画像字段。">
 <style>
   :root{
-    --bg:#faf9f6;--bg-soft:#f3f1ec;--fg:#2b2b28;--muted:#85837c;
-    --line:#e7e4dd;--accent:#2f6b4f;--accent-soft:#e7efe9;--card:#ffffff;
+    --parchment:#f5f4ed; --ivory:#faf9f5; --ink:#141413; --olive:#5e5d59;
+    --stone:#87867f; --line:#e8e6dc; --line-soft:#f0eee6; --terracotta:#c96442;
+    --coral:#d97757; --sand:#e8e6dc; --charcoal:#4d4c48; --dark:#141413;
+    --dark-surface:#30302e; --silver:#b0aea5;
   }
   @media (prefers-color-scheme: dark){
-    :root{--bg:#1c1c1a;--bg-soft:#232320;--fg:#e8e6e0;--muted:#9a988f;
-      --line:#2e2d2a;--accent:#6fa88a;--accent-soft:#24332b;--card:#242422;}
+    :root{
+      --parchment:#141413; --ivory:#1e1e1c; --ink:#faf9f5; --olive:#b0aea5;
+      --stone:#87867f; --line:#30302e; --line-soft:#2a2927;
+      --terracotta:#d97757; --coral:#e08a68; --sand:#30302e; --charcoal:#faf9f5;
+      --dark:#0e0e0d; --dark-surface:#262624; --silver:#b0aea5;
+    }
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--fg);
+  body{background:var(--parchment);color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
-  a{color:var(--accent);text-decoration:none}
-  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  a{color:var(--terracotta);text-decoration:none}
+  a:hover{color:var(--coral)}
+  .serif{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500}
+  .wrap{max-width:960px;margin:0 auto;padding:0 26px}
+  .topline{height:3px;background:var(--terracotta)}
 
   header{padding:40px 0 20px}
-  .crumb{font-size:.85rem;color:var(--muted);margin-bottom:10px}
-  h1{font-family:Georgia,"Songti SC","SimSun",serif;font-size:1.7rem;font-weight:700}
-  .sub{color:var(--muted);margin-top:8px;font-size:.95rem}
+  .crumb{font-size:.85rem;color:var(--stone);margin-bottom:12px}
+  h1{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500;font-size:1.8rem;letter-spacing:-.01em}
+  .sub{color:var(--olive);margin-top:10px;font-size:.95rem;line-height:1.7;max-width:40em}
 
-  section{padding:28px 0}
+  section{padding:30px 0}
 
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
-  .card .n{font-size:1.8rem;font-weight:700;color:var(--accent)}
-  .card .l{color:var(--muted);font-size:.85rem;margin-top:4px}
+  .card{background:var(--ivory);border:1px solid var(--line-soft);border-radius:12px;padding:22px}
+  .card .n{font-size:1.9rem;font-weight:600;color:var(--terracotta);font-family:Georgia,"Songti SC","STSong","SimSun",serif}
+  .card .l{color:var(--stone);font-size:.85rem;margin-top:4px}
 
-  .bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
-  .bar-group h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:12px;font-weight:600}
+  .bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px}
+  .bar-group h3{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--terracotta);margin-bottom:14px;font-weight:600}
   .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.9rem}
-  .bar-row .k{width:64px;flex-shrink:0;color:var(--fg)}
-  .bar-row .track{flex:1;background:var(--bg-soft);border-radius:100px;height:14px;overflow:hidden}
-  .bar-row .fill{height:100%;background:var(--accent);border-radius:100px;opacity:.75}
-  .bar-row .c{width:34px;text-align:right;color:var(--muted);font-size:.82rem}
+  .bar-row .k{width:64px;flex-shrink:0}
+  .bar-row .track{flex:1;background:var(--sand);border-radius:100px;height:12px;overflow:hidden}
+  .bar-row .fill{height:100%;background:var(--terracotta);border-radius:100px;opacity:.8}
+  .bar-row .c{width:34px;text-align:right;color:var(--stone);font-size:.82rem}
 
   .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
   .toolbar input,.toolbar select{
-    background:var(--card);border:1px solid var(--line);color:var(--fg);
-    border-radius:8px;padding:8px 12px;font-size:.92rem;outline:none}
-  .toolbar input:focus,.toolbar select:focus{border-color:var(--accent)}
+    background:var(--ivory);border:1px solid var(--line);color:var(--ink);
+    border-radius:8px;padding:9px 13px;font-size:.92rem;outline:none;font-family:inherit}
+  .toolbar input:focus,.toolbar select:focus{border-color:var(--terracotta)}
   .toolbar input{flex:1;min-width:200px}
   .toolbar select{min-width:130px}
 
-  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-  th,td{padding:11px 12px;text-align:left;font-size:.9rem;border-bottom:1px solid var(--line)}
-  th{background:var(--bg-soft);color:var(--muted);font-weight:600;font-size:.8rem;letter-spacing:.02em}
+  table{width:100%;border-collapse:collapse;background:var(--ivory);border:1px solid var(--line-soft);border-radius:12px;overflow:hidden}
+  th,td{padding:11px 13px;text-align:left;font-size:.9rem;border-bottom:1px solid var(--line-soft)}
+  th{background:var(--sand);color:var(--olive);font-weight:600;font-size:.78rem;letter-spacing:.04em}
   tbody tr:last-child td{border-bottom:none}
-  tbody tr:hover{background:var(--bg-soft)}
-  .empty{padding:40px;text-align:center;color:var(--muted)}
+  tbody tr:hover{background:color-mix(in srgb,var(--sand) 45%,transparent)}
+  .empty{padding:44px;text-align:center;color:var(--stone)}
 
   .pager{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px;font-size:.9rem}
-  .pager button{background:var(--card);border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:.9rem}
+  .pager button{background:var(--ivory);border:1px solid var(--line);color:var(--charcoal);border-radius:8px;padding:6px 15px;cursor:pointer;font-size:.9rem;font-family:inherit}
+  .pager button:hover{border-color:var(--terracotta);color:var(--terracotta)}
   .pager button:disabled{opacity:.4;cursor:not-allowed}
-  .pager .info{color:var(--muted)}
+  .pager .info{color:var(--stone)}
 
-  footer{padding:30px 0 50px;color:var(--muted);font-size:.85rem;text-align:center}
+  footer{padding:30px 0 54px;color:var(--stone);font-size:.85rem;text-align:center}
   @media (max-width:600px){table{font-size:.8rem}th,td{padding:8px 8px}}
 </style>
 </head>
 <body>
+
+<div class="topline"></div>
 
 <header>
   <div class="wrap">
@@ -154,7 +166,6 @@ async function loadStats(){
     $("edu-bars").innerHTML = bar(d.education);
     $("city-bars").innerHTML = bar(d.city);
 
-    // 填充筛选下拉
     $("city").innerHTML = '<option value="">全部城市</option>' + d.city.map(x=>`<option value="${x.k}">${x.k} (${x.c})</option>`).join("");
     $("education").innerHTML = '<option value="">全部学历</option>' + d.education.map(x=>`<option value="${x.k}">${x.k} (${x.c})</option>`).join("");
   }catch(e){ console.error(e); }

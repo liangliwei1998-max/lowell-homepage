@@ -90,6 +90,10 @@
   .sem-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
   .sem-tags span{font-size:.72rem;color:var(--olive);background:var(--sand);padding:2px 8px;border-radius:100px}
   .sem-loading{color:var(--stone);font-size:.9rem;padding:8px 0}
+  .eg{background:var(--sand);border:1px solid var(--line);color:var(--charcoal);border-radius:100px;padding:4px 12px;cursor:pointer;font-size:.78rem;font-family:inherit}
+  .eg:hover{border-color:var(--terracotta);color:var(--terracotta)}
+  .scrape-meta{color:var(--terracotta);font-size:.85rem;margin-bottom:8px}
+  .scrape-out{background:var(--parchment);border:1px solid var(--line);border-radius:8px;padding:14px;font-size:.85rem;line-height:1.6;white-space:pre-wrap;word-break:break-word;max-height:400px;overflow-y:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 
   footer{padding:30px 0 54px;color:var(--stone);font-size:.85rem;text-align:center}
   @media (max-width:600px){table{font-size:.8rem}th,td{padding:8px 8px}}
@@ -139,6 +143,22 @@
         <button id="semantic-btn">搜索</button>
       </div>
       <div class="sem-results" id="semantic-results"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="semantic">
+      <h3>网页抓取演示（无头浏览器）</h3>
+      <p class="hint">普通程序抓不到的 JS 渲染页面，这个能抓到——等 JS 跑完再拿内容，还自动转成 Markdown。输入网址试试，或点下面的示例。</p>
+      <div class="s-form">
+        <input type="text" id="scrape-url" placeholder="输入网址，例如 https://example.com">
+        <button id="scrape-btn">抓取</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+        <button class="eg" data-url="https://example.com">example.com</button>
+        <button class="eg" data-url="https://news.ycombinator.com">Hacker News</button>
+      </div>
+      <div class="sem-results" id="scrape-results"></div>
     </div>
   </section>
 
@@ -263,6 +283,36 @@ async function semanticSearch(){
 
 $("semantic-btn").addEventListener("click", semanticSearch);
 $("semantic-q").addEventListener("keydown", e => { if(e.key === "Enter") semanticSearch(); });
+
+function escapeHtml(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+async function scrapePage(u){
+  const url = u || $("scrape-url").value.trim();
+  if(!url) return;
+  const box = $("scrape-results");
+  box.innerHTML = '<div class="sem-loading">抓取中（等页面 JS 渲染完）…</div>';
+  try{
+    const r = await fetch("/api/render?action=content&url=" + encodeURIComponent(url));
+    const d = await r.json();
+    if(d.error){
+      box.innerHTML = '<div class="sem-loading">出错：' + escapeHtml(d.error) + '</div>';
+      return;
+    }
+    const body = d.result || d.markdown || d.content || JSON.stringify(d);
+    box.innerHTML = '<div class="scrape-meta">抓取成功 · ' + escapeHtml(url) + '</div><pre class="scrape-out">' + escapeHtml(body) + '</pre>';
+  }catch(e){
+    box.innerHTML = '<div class="sem-loading">抓取出错，请稍后再试。</div>';
+  }
+}
+
+$("scrape-btn").addEventListener("click", () => scrapePage());
+$("scrape-url").addEventListener("keydown", e => { if(e.key === "Enter") scrapePage(); });
+document.querySelectorAll(".eg").forEach(b => b.addEventListener("click", () => {
+  $("scrape-url").value = b.dataset.url;
+  scrapePage(b.dataset.url);
+}));
 
 loadStats();
 loadRows();

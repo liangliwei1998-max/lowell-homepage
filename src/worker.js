@@ -147,19 +147,34 @@ function json(obj) {
 
 // ---- Browser Rendering（无头浏览器抓取 JS 渲染后的页面）----
 
+const ALLOWED_HOSTS = [
+  "example.com",
+  "example.org",
+  "httpbin.org",
+  "httpbin.dev",
+  "lowell-homepage.liangliwei1998.workers.dev",
+  "news.ycombinator.com",
+  "hn.algolia.com",
+];
+
 async function renderPage(url, request, env) {
-  const key = request.headers.get("X-Index-Key") || "";
-  if (key !== env.INDEX_SECRET) {
-    return new Response("unauthorized", { status: 401 });
-  }
   const target = (url.searchParams.get("url") || "").trim();
   if (!target || !/^https?:\/\//i.test(target)) {
     return json({ error: "需要合法的 http(s) url 参数" });
   }
+  const action = url.searchParams.get("action") || "content";
+  const host = new URL(target).hostname;
+  const allowed = ALLOWED_HOSTS.some((h) => host === h || host.endsWith("." + h));
+  if (!allowed) {
+    const key = request.headers.get("X-Index-Key") || "";
+    if (key !== env.INDEX_SECRET) {
+      return json({ error: "该域名需要授权，请使用示例网站，或带上授权 key" });
+    }
+  }
   try {
-    const resp = await env.BROWSER.quickAction("content", { url: target });
+    const resp = await env.BROWSER.quickAction(action, { url: target });
     const data = await resp.json();
-    return json({ url: target, ...data });
+    return json({ url: target, action, ...data });
   } catch (e) {
     return json({ error: e && e.message ? e.message : String(e) });
   }

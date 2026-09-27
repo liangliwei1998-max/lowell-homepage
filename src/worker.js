@@ -15,6 +15,9 @@ export default {
     if (path === "/api/reindex" && request.method === "POST") {
       return rebuildIndex(request, env);
     }
+    if (path === "/api/render") {
+      return renderPage(url, request, env);
+    }
 
     // 其他路径交给静态资源（assets），未命中时由 not_found_handling 兜底
     return env.ASSETS.fetch(request);
@@ -140,4 +143,24 @@ function json(obj) {
       "Cache-Control": "no-store",
     },
   });
+}
+
+// ---- Browser Rendering（无头浏览器抓取 JS 渲染后的页面）----
+
+async function renderPage(url, request, env) {
+  const key = request.headers.get("X-Index-Key") || "";
+  if (key !== env.INDEX_SECRET) {
+    return new Response("unauthorized", { status: 401 });
+  }
+  const target = (url.searchParams.get("url") || "").trim();
+  if (!target || !/^https?:\/\//i.test(target)) {
+    return json({ error: "需要合法的 http(s) url 参数" });
+  }
+  try {
+    const resp = await env.BROWSER.quickAction("content", { url: target });
+    const data = await resp.json();
+    return json({ url: target, ...data });
+  } catch (e) {
+    return json({ error: e && e.message ? e.message : String(e) });
+  }
 }

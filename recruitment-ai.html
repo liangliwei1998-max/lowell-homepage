@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>给招聘软件加一层 AI，我先想清楚的是不做什么 · Lowell 的博客</title>
+<style>
+:root{--parchment:#f5f4ed;--ivory:#faf9f5;--ink:#141413;--olive:#5e5d59;--stone:#87867f;--line:#e8e6dc;--line-soft:#f0eee6;--terracotta:#c96442;--coral:#d97757;--sand:#e8e6dc;--charcoal:#4d4c48;--dark:#141413;--dark-surface:#30302e;--silver:#b0aea5}
+@media (prefers-color-scheme: dark){:root{--parchment:#141413;--ivory:#1e1e1c;--ink:#faf9f5;--olive:#b0aea5;--stone:#87867f;--line:#30302e;--line-soft:#2a2927;--terracotta:#d97757;--coral:#e08a68;--sand:#30302e;--charcoal:#faf9f5;--dark:#0e0e0d;--dark-surface:#262624;--silver:#b0aea5}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--parchment);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.8;font-size:16.5px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+a{color:var(--terracotta);text-decoration:none;transition:color .15s}
+a:hover{color:var(--coral)}
+.wrap{max-width:720px;margin:0 auto;padding:0 26px}
+.topline{height:3px;background:var(--terracotta)}
+header{padding:44px 0 8px}
+.crumb{font-size:.88rem;color:var(--stone);margin-bottom:18px}
+article{padding:30px 0 20px}
+article h1{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500;font-size:2rem;line-height:1.35;letter-spacing:-.01em;margin-bottom:12px}
+article .date{color:var(--stone);font-size:.85rem;margin-bottom:6px}
+article .tags{display:flex;gap:8px;margin-top:12px}
+article .tag{font-size:.72rem;color:var(--terracotta);background:color-mix(in srgb,var(--terracotta) 10%,transparent);padding:3px 11px;border-radius:100px;font-weight:500}
+article .body{margin-top:28px}
+article .body p{margin-bottom:22px;line-height:1.9;color:var(--ink)}
+article .body strong{font-weight:600}
+article .body blockquote{border-left:2px solid var(--terracotta);padding:4px 0 4px 20px;margin:28px 0;color:var(--olive);font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-size:1.08rem;line-height:1.8}
+.back{font-size:.88rem;color:var(--stone)}
+footer{padding:36px 0 64px;color:var(--stone);font-size:.85rem;text-align:center}
+@media (max-width:600px){body{font-size:15.5px}article h1{font-size:1.55rem}}
+
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header><div class="wrap"><div class="crumb"><a href="/#posts">← 返回博客</a></div></div></header>
+<article>
+  <div class="wrap">
+    <h1>给招聘软件加一层 AI，我先想清楚的是不做什么</h1>
+    <div class="date">2026-09-20</div>
+    <div class="tags"><span class="tag">AI</span><span class="tag">招聘</span><span class="tag">落地</span></div>
+    <div class="body">
+      <p>公司要招人，渠道有好几个——Boss 直聘、猎聘、智联，简历散在各处，HR 得一个个去翻、去筛、去回。量大一点，光「这人合不合适」的初筛就很花时间。</p>
+      <p>我的做法不是从零写一个招聘系统。市面上成熟的招聘软件已经不少了，我先把它们本地化部署起来，把入口和流程跑通，再往上接一层 AI——让大模型去做候选人智能评分、关键词筛选、自动打招呼。</p>
+      <p>评分、筛选、打招呼，这三件事都是重复又费眼的活，机器干比人快，也稳定。但它不替你拍板，最后要不要这个人，还是 HR 说了算。</p>
+      <p>这事我到现在也没完全上线推广开，收集了几百份简历，节奏不算快。但我把「怎么在成熟产品上叠 AI」这条路走通了，这比做一个花哨的半成品实在。</p>
+      <blockquote>不重复造轮子。成熟产品的价值在于把它落地，再用 AI 补上筛选评分那段。真正的竞争力不在「自研一个系统」，而在「让东西在这家公司真正跑起来」。</blockquote>
+      <p class="back"><a href="/#posts">← 返回文章列表</a></p>
+    </div>
+  </div>
+</article>
+<footer><div class="wrap">© 2026 Lowell · 个人博客</div></footer>
+</body>
+</html>

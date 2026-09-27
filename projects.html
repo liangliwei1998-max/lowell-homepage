@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目 · Lowell 的博客</title>
+<meta name="description" content="做过的项目与思考：HR 数字化、系统落地、AI 应用。">
+<style>
+  :root{
+    --parchment:#f5f4ed; --ivory:#faf9f5; --ink:#141413; --olive:#5e5d59;
+    --stone:#87867f; --line:#e8e6dc; --line-soft:#f0eee6; --terracotta:#c96442;
+    --coral:#d97757; --sand:#e8e6dc; --charcoal:#4d4c48; --dark:#141413;
+    --dark-surface:#30302e; --silver:#b0aea5;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --parchment:#141413; --ivory:#1e1e1c; --ink:#faf9f5; --olive:#b0aea5;
+      --stone:#87867f; --line:#30302e; --line-soft:#2a2927;
+      --terracotta:#d97757; --coral:#e08a68; --sand:#30302e; --charcoal:#faf9f5;
+      --dark:#0e0e0d; --dark-surface:#262624; --silver:#b0aea5;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--parchment);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;font-size:16.5px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+  .serif{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500}
+  a{color:var(--terracotta);text-decoration:none}
+  a:hover{color:var(--coral)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 26px}
+  .topline{height:3px;background:var(--terracotta)}
+
+  header{padding:48px 0 24px}
+  .crumb{font-size:.85rem;color:var(--stone);margin-bottom:14px}
+  h1{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500;font-size:2rem;letter-spacing:-.01em}
+  .sub{color:var(--olive);margin-top:12px;font-size:.98rem;max-width:36em}
+
+  .group{margin-top:40px}
+  .group h2{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500;font-size:1.15rem;color:var(--terracotta);margin-bottom:6px;letter-spacing:.01em}
+  .group .g-sub{color:var(--stone);font-size:.82rem;margin-bottom:16px}
+
+  .proj{background:var(--ivory);border:1px solid var(--line-soft);border-radius:14px;padding:26px 28px;margin-bottom:18px;transition:border-color .15s}
+  .proj:hover{border-color:var(--line)}
+  .proj-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;margin-bottom:10px}
+  .proj h3{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500;font-size:1.28rem;line-height:1.3}
+  .proj .year{color:var(--stone);font-size:.82rem;font-variant-numeric:tabular-nums}
+  .proj .desc{color:var(--olive);line-height:1.8}
+  .proj .done{margin:12px 0 4px;padding-left:20px}
+  .proj .done li{font-size:.95rem;margin-bottom:6px;color:var(--ink)}
+  .proj .think{margin-top:16px;border-left:2px solid var(--terracotta);padding:2px 0 2px 18px}
+  .proj .think .t-label{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terracotta);font-weight:600;display:block;margin-bottom:6px}
+  .proj .think p{font-family:Georgia,"Songti SC","STSong","SimSun",serif;color:var(--olive);line-height:1.8;font-size:1rem}
+  .proj .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .proj .tag{font-size:.72rem;color:var(--terracotta);background:color-mix(in srgb,var(--terracotta) 10%,transparent);padding:3px 10px;border-radius:100px;font-weight:500}
+
+  footer{padding:40px 0 64px;color:var(--stone);font-size:.85rem;text-align:center}
+  @media (max-width:600px){body{font-size:15.5px}h1{font-size:1.55rem}.proj{padding:20px 18px}}
+</style>
+</head>
+<body>
+
+<div class="topline"></div>
+
+<header>
+  <div class="wrap">
+    <div class="crumb"><a href="/">← 返回博客</a></div>
+    <h1>做过的项目</h1>
+    <p class="sub">按时间倒序，从最近的 AI 落地往回看。每个项目后面都有一段「我的思考」——比起做了什么，我更想记下当时怎么想的。</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="group">
+    <h2>AI 与数字化实践</h2>
+    <div class="g-sub">最近一年，正在做的事</div>
+
+    <div class="proj">
+      <div class="proj-head"><h3>招聘自动化平台（本地化部署 + AI 改造）</h3><span class="year">2026</span></div>
+      <p class="desc">面向 HR 和猎头的招聘自动化工具，支持 Boss 直聘、猎聘等平台。基于市面上成熟的招聘软件做本地化部署，再往上接 AI 能力。</p>
+      <ul class="done">
+        <li>本地化部署成熟招聘软件，完成入口搭建与代码改造</li>
+        <li>集成大语言模型，实现候选人智能评分、关键词筛选、自动打招呼</li>
+        <li>已上线，业务推广中</li>
+      </ul>
+      <div class="think"><span class="t-label">我的思考</span>
+        <p>不重复造轮子。市面上成熟的招聘软件，价值在于把它本地化落地、再用 AI 补上筛选评分那一段。真正的竞争力不在「自研一个系统」，而在「让别人的东西在这家公司真正跑起来」。</p>
+      </div>
+      <div class="tags"><span class="tag">招聘自动化</span><span class="tag">AI 集成</span><span class="tag">本地化部署</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head"><h3>加班转调休功能</h3><span class="year">2026</span></div>
+      <p class="desc">两套系统（人事 + OA）配合，覆盖集团约 800 名间接人员，把「加班结转调休」从 Excel 手工算变成线上流程。</p>
+      <ul class="done">
+        <li>员工线上对账，附历史加班记录</li>
+        <li>考勤人员手工核对对比，确保准确</li>
+        <li>已上线在用</li>
+      </ul>
+      <div class="think"><span class="t-label">我的思考</span>
+        <p>难的不是写代码，是把规则问清楚。不同工种折算比例不一样，加班分平时、周末、节假日，这些规则都装在老员工的脑子里，没人写在纸上。需求阶段问漏一条，上线就要返工。</p>
+      </div>
+      <div class="tags"><span class="tag">系统集成</span><span class="tag">流程自动化</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head"><h3>线上学习地图</h3><span class="year">2024 — 至今</span></div>
+      <p class="desc">把培训做成线上闭环：课件上传、自动生成试题，做成新员工转正的必过环节。</p>
+      <ul class="done">
+        <li>课件上传 + 自动生成试题</li>
+        <li>新员工转正必过环节</li>
+        <li>配套学习地图报表、课程库与课件管理</li>
+      </ul>
+      <div class="think"><span class="t-label">我的思考</span>
+        <p>培训要闭环。课件、试题、转正必过环节，把「学了没有」变成可量化的流程，而不是发一堆课件就完事。培训的价值在「学没学会」，不在「发没发够」。</p>
+      </div>
+      <div class="tags"><span class="tag">培训数字化</span><span class="tag">学习平台</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2>运维与应急</h2>
+    <div class="g-sub">系统不挂，才算真的会运维</div>
+
+    <div class="proj">
+      <div class="proj-head"><h3>HR 系统勒索病毒应急恢复</h3><span class="year">2026-09</span></div>
+      <p class="desc">公司系统遭勒索病毒攻击、HR 系统全面瘫痪。第一时间做本地部署保障数据核对，当天下午恢复使用。</p>
+      <ul class="done">
+        <li>第一时间本地部署，保障各地 HR 数据核对不中断</li>
+        <li>次日配合第三方网安排查，当天下午恢复系统</li>
+        <li>之后与 IT 部门重新调通 OA 接口、企微组织架构同步</li>
+      </ul>
+      <div class="think"><span class="t-label">我的思考</span>
+        <p>系统可以坏，数据不能丢。应急响应的第一优先级不是修系统，是先保住数据、让业务能核对。这次让我明白，HRIS 运维的核心能力是「系统挂了怎么办」，而不只是「系统怎么用」。</p>
+      </div>
+      <div class="tags"><span class="tag">应急响应</span><span class="tag">数据安全</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2>跨国与大型集成</h2>
+    <div class="g-sub">复杂度来自合规、口径和跨系统</div>
+
+    <div class="proj">
+      <div class="proj-head"><h3>越南厂区薪酬考勤项目</h3><span class="year">2025</span></div>
+      <p class="desc">越南厂区从零上线，实现跨国线上薪酬核算，覆盖 2000 余员工。</p>
+      <ul class="done">
+        <li>负责需求对接、进度把控、客制化报表开发</li>
+        <li>适配越南劳动法，打通中越两地数据流转</li>
+      </ul>
+      <div class="think"><span class="t-label">我的思考</span>
+        <p>跨国项目难在合规和口径。越南劳动法、中越数据打通，这些「看起来是配置」的事，才是真正决定系统能不能用的关键。技术反而不是最难的。</p>
+      </div>
+      <div class="tags"><span class="tag">跨国薪酬</span><span class="tag">合规</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head"><h3>一体化 ERP + HR 项目</h3><span class="year">2022</span></div>
+      <p class="desc">替客户替换掉简道云、U8、钉钉等多套系统，人力、供应链、财务、银企直连、OA、外贸六个模块一并上线。</p>
+      <ul class="done">
+        <li>负责人力六大模块实施、审批流程搭建、权限划分</li>
+        <li>统筹项目团队，解决多系统数据不互通问题</li>
+      </ul>
+      <div class="think"><span class="t-label">我的思考</span>
+        <p>多系统数据不互通是企业数字化的老毛病。把六套系统换成一个，核心价值在「打通」，不在「功能多」。系统越多，数据越散，决策越慢。</p>
+      </div>
+      <div class="tags"><span class="tag">系统集成</span><span class="tag">多模块</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2>乙方实施交付</h2>
+    <div class="g-sub">职业生涯的前半段，打好底子的阶段</div>
+
+    <div class="proj">
+      <div class="proj-head"><h3>多地区考勤人事项目</h3><span class="year">2023 — 2024</span></div>
+      <p class="desc">内地、香港、澳门、马来西亚、新加坡多地考勤与人事系统配置实施，服务某国际品牌客户。</p>
+      <ul class="done">
+        <li>按各地区文化与法律要求做差异化配置</li>
+        <li>组织各地用户培训</li>
+      </ul>
+      <div class="think"><span class="t-label">我的思考</span>
+        <p>多地区考勤人事，差异在文化和法律。一套系统要适配不同地区的规则，靠的是把差异做成配置，而不是靠复制。做配置的人，才是真正理解业务的人。</p>
+      </div>
+      <div class="tags"><span class="tag">多地区</span><span class="tag">考勤人事</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head"><h3>EHR 项目（员工关系 / 薪酬 / 招聘）</h3><span class="year">2021 — 2022</span></div>
+      <p class="desc">面向某交通建设集团各分公司的人员管理系统，覆盖员工关系、薪酬、招聘模块。</p>
+      <ul class="done">
+        <li>独立完成前期调研、蓝图确认、软件实施、全员培训、上线运维全周期</li>
+        <li>负责软件本地安装与数据库操作，通过后台数据库查询解决上线问题</li>
+      </ul>
+      <div class="think"><span class="t-label">我的思考</span>
+        <p>独立跑完整个项目周期（调研到运维），才真正理解一个系统从 0 到 1 要踩多少坑。这次经历让我从「执行者」开始往「能独立扛项目的人」走。</p>
+      </div>
+      <div class="tags"><span class="tag">EHR</span><span class="tag">全周期交付</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head"><h3>智慧合同管理项目</h3><span class="year">2021 — 2022</span></div>
+      <p class="desc">面向某市政国企（下辖十五家分公司）上线智慧合同管理，覆盖合同起草、审批、登记、履约、结算、发票全过程。</p>
+      <ul class="done">
+        <li>上线合同全流程管理</li>
+        <li>打通合同管理与财务系统，实现结算数据同步与报表输出</li>
+      </ul>
+      <div class="think"><span class="t-label">我的思考</span>
+        <p>合同管理和财务系统打通，让「结算数据同步」自动化，减少手工对账。跨系统对接的价值，就是把两个部门之间的重复劳动干掉。</p>
+      </div>
+      <div class="tags"><span class="tag">合同管理</span><span class="tag">系统对接</span></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Lowell · 个人博客</div>
+</footer>
+
+</body>
+</html>

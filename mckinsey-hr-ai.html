@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>麦肯锡 2026 HR/AI 转型报告精读 · Lowell 的博客</title>
+<meta name="description" content="三份麦肯锡 2026 报告的中文精读：HR Monitor 2026、Escaping the pilot trap、The State of Organizations 2026，及 HRIS/AI+HR 实战映射。">
+<style>
+  :root{
+    --parchment:#f5f4ed; --ivory:#faf9f5; --ink:#141413; --olive:#5e5d59;
+    --stone:#87867f; --line:#e8e6dc; --line-soft:#f0eee6; --terracotta:#c96442;
+    --coral:#d97757; --sand:#e8e6dc; --charcoal:#4d4c48; --dark:#141413;
+    --dark-surface:#30302e; --silver:#b0aea5;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --parchment:#141413; --ivory:#1e1e1c; --ink:#faf9f5; --olive:#b0aea5;
+      --stone:#87867f; --line:#30302e; --line-soft:#2a2927;
+      --terracotta:#d97757; --coral:#e08a68; --sand:#30302e; --charcoal:#faf9f5;
+      --dark:#0e0e0d; --dark-surface:#262624; --silver:#b0aea5;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--parchment);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.8;font-size:16.5px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+  .serif{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500}
+  a{color:var(--terracotta);text-decoration:none}
+  a:hover{color:var(--coral)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 26px}
+  .topline{height:3px;background:var(--terracotta)}
+
+  header{padding:48px 0 24px}
+  .crumb{font-size:.85rem;color:var(--stone);margin-bottom:14px}
+  h1{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500;font-size:2rem;line-height:1.3;letter-spacing:-.01em}
+  .meta{color:var(--stone);font-size:.85rem;margin-top:14px}
+
+  .article{padding:10px 0 20px}
+  .article h2{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500;font-size:1.45rem;line-height:1.35;margin:48px 0 16px;padding-top:8px}
+  .article h3{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500;font-size:1.18rem;margin:30px 0 12px;color:var(--charcoal)}
+  .article p{margin-bottom:18px;line-height:1.85}
+  .article strong{font-weight:600}
+  .article ul,.article ol{margin:0 0 20px 22px;line-height:1.85}
+  .article li{margin-bottom:8px}
+  .article blockquote{
+    border-left:2px solid var(--terracotta);padding:4px 0 4px 20px;margin:24px 0;
+    color:var(--olive);font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-size:1.05rem;line-height:1.75;
+  }
+  .article .lead{font-size:1.08rem;color:var(--olive);line-height:1.9}
+
+  /* 表格 */
+  .table-wrap{overflow-x:auto;margin:20px 0 26px}
+  table{width:100%;border-collapse:collapse;background:var(--ivory);border:1px solid var(--line-soft);border-radius:10px;font-size:.9rem;line-height:1.6}
+  th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  th{background:var(--sand);color:var(--olive);font-weight:600;font-size:.8rem;letter-spacing:.03em;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:color-mix(in srgb,var(--sand) 45%,transparent)}
+  td .star{color:var(--terracotta);letter-spacing:1px}
+
+  /* 关键词 pill */
+  .kw{display:inline-block;font-size:.78rem;color:var(--terracotta);background:color-mix(in srgb,var(--terracotta) 10%,transparent);padding:4px 12px;border-radius:100px;margin:0 6px 10px 0;font-weight:500}
+
+  /* 金句列表 */
+  .quotes{margin:16px 0}
+  .quotes .q{padding:14px 0;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:baseline}
+  .quotes .q:last-child{border-bottom:none}
+  .quotes .n{font-family:Georgia,serif;color:var(--terracotta);font-size:1.1rem;flex-shrink:0}
+  .quotes .t{line-height:1.7}
+
+  .src{background:var(--ivory);border:1px solid var(--line-soft);border-radius:12px;padding:22px 26px;margin-top:8px}
+  .src li{margin-bottom:10px;font-size:.94rem}
+
+  footer{padding:36px 0 60px;color:var(--stone);font-size:.85rem;text-align:center}
+  @media (max-width:600px){body{font-size:15.5px}h1{font-size:1.55rem}.article h2{font-size:1.25rem}}
+</style>
+</head>
+<body>
+
+<div class="topline"></div>
+
+<header>
+  <div class="wrap">
+    <div class="crumb"><a href="/">← 返回博客</a></div>
+    <h1>麦肯锡 2026 HR / AI 转型报告精读</h1>
+    <div class="meta">三份核心材料的中文深度解读 · 页码导读 · 框架整合 · HRIS / AI+HR 实战映射</div>
+    <div class="meta">基于 McKinsey 官方 2026 材料 · 整理日期 2026-09-19</div>
+  </div>
+</header>
+
+<main class="wrap">
+<article class="article">
+
+  <h2>一、先看结论：三份报告其实讲的是同一件事</h2>
+  <p class="lead">一句话：AI 对 HR 的真正影响不是「给 HR 增加几个 AI 工具」，而是把 HR 从「流程管理部门」推向「设计人 + AI Agent 如何共同工作的组织能力平台」。</p>
+  <p>《HR Monitor 2026》从 HR 自身出发，指出 workforce planning、招聘、发展、员工体验和 HR operating model 都在发生结构性变化；《The State of Organizations 2026》把这一变化放到企业整体 operating model 中；《Escaping the pilot trap》进一步提出「North Star-back」：先定义 2030 年 human-agent operating model，再倒推实施。</p>
+  <h3>对 HRIS / AI+HR 从业者最重要的判断</h3>
+  <ul>
+    <li>价值单位正在从「一个功能 / 一个系统」变成「一个端到端 workflow」。</li>
+    <li>HRIS 的核心竞争力正在从功能覆盖转向数据、流程、集成和 AI orchestration 的底座能力。</li>
+    <li>AI 项目的交付物不应只是 chatbot、Copilot 或自动化脚本，而应是可衡量的流程重设计。</li>
+    <li>未来 HR 中会出现 People Strategist、People Technologist、People Scientist、Flow-to-work Generalist 等混合型角色。</li>
+    <li>对 HRIS/AI+HR 从业者而言，「懂 HR + 懂系统 + 懂项目 + 懂 AI」的交叉能力越来越重要。</li>
+  </ul>
+
+  <h2>二、三份报告的基本信息与可信度边界</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>材料</th><th>时间 / 规模</th><th>核心问题</th><th>相关度</th></tr></thead>
+      <tbody>
+        <tr><td>HR Monitor 2026</td><td>2026-06；44 页；约 1,300 名 HR、5,500 名员工；10 国</td><td>HR 现在发生了什么？</td><td><span class="star">★★★★★</span></td></tr>
+        <tr><td>Escaping the pilot trap</td><td>2026-08-04；文章</td><td>Agentic HR 如何从试点走向体系？</td><td><span class="star">★★★★★</span></td></tr>
+        <tr><td>State of Organizations 2026</td><td>2026-02；74 页；10,000+ 高管；15 国、16 行业</td><td>整个组织为什么必须重构？</td><td><span class="star">★★★★★</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>数据口径需要特别注意：HR Monitor 的 2026 年调研于 2026 年 1 月完成，主要覆盖欧洲八国，并以美国、中国做比较；与 2025 年比较时，国家覆盖变化意味着同比变化更适合作为方向性信号，而非严格同口径实验结果。</p>
+  <p>State of Organizations 2026 基于 10,000+ 名高级管理者、15 个国家和 16 个行业，重点不是 HR 单一职能，而是组织层面的生产率、AI、共享服务、领导力、绩效和持续变革。</p>
+
+  <h2>三、《HR Monitor 2026》逐章精读</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>原页码</th><th>章节</th><th>精读重点</th></tr></thead>
+      <tbody>
+        <tr><td>1–3</td><td>封面、Preface</td><td>HR 的双重角色：AI transformation architect + lighthouse</td></tr>
+        <tr><td>4–5</td><td>Introduction</td><td>五个优先变化；从 functional excellence 到 system-level transformation</td></tr>
+        <tr><td>6–10</td><td>Chapter 1</td><td>战略 workforce planning、skills intelligence、任务/能力模型</td></tr>
+        <tr><td>11–17</td><td>Chapter 2</td><td>招聘效率、AI 筛选、候选人体验、内部流动</td></tr>
+        <tr><td>18–22</td><td>Chapter 3</td><td>绩效、反馈、学习、AI 技能、技能发展闭环</td></tr>
+        <tr><td>23–30</td><td>Chapter 4</td><td>员工体验、薪酬、工作生活平衡、稳定性、透明度</td></tr>
+        <tr><td>31–38</td><td>Chapter 5</td><td>HR operating model、Ulrich → agile/machine-powered、AI adoption</td></tr>
+        <tr><td>39</td><td>Conclusion</td><td>HR 站在定义性时刻：被 IT 吸收，或成为人机协作设计者</td></tr>
+        <tr><td>40–44</td><td>Appendix / Authors</td><td>调查与作者信息</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3.1 Introduction：HR 已经从「职能优化」进入「系统级转型」</h3>
+  <p>报告的核心判断是：AI 改变的是 work gets done，而不只是工具。HR 一方面要成为企业 AI 转型的 architect，负责角色、技能和人机协作；另一方面要成为 lighthouse，用 HR 自己的流程证明 AI 转型可行。</p>
+  <p>五个变化是全篇主轴：① workforce planning 从 headcount 转向 capability；② 招聘从「抢人」转向 hiring effectiveness；③ performance + development 重新成为核心；④ 经济不确定性让员工更重视薪酬、平衡和安全感；⑤ Agentic HR 出现，但规模化 AI 采用仍有限。</p>
+
+  <h3>3.2 Chapter 1：Workforce planning 的单位正在改变</h3>
+  <p>最关键的数据：只有 11% 的组织做 3 年以上的战略 workforce planning；62% 的 HR 专业人士表示企业在全公司范围进行 workforce planning，但大量计划仍停留在短周期。85% 的组织已经有 skills taxonomy，但只有 57% 同时把组织级 workforce planning 与完整技能文档结合。</p>
+  <p>麦肯锡进一步强调：46% 仍按具体岗位/职位预测，约三分之一按 job family，只有 22% 使用 skill-based forecasting。AI 变化速度又让单点预测越来越不可靠，因此需要 scenario-based planning。</p>
+  <p>深层含义：未来 workforce planning 的对象不再是「岗位数量」，而是「任务如何变化 → 哪些任务由人做 → 哪些由 Agent 做 → 需要什么能力 → 能力从哪里来」。</p>
+  <p>对 HRIS 的启示：如果系统只有 employee + position + department 三层数据，它很难支撑 AI 时代 workforce planning；至少需要逐步建立 job family、skill、task、career path、learning 和 AI capability 的关联。</p>
+
+  <h3>3.3 Chapter 2：招聘 AI 的重点不是「筛简历」，而是重构招聘流程</h3>
+  <p>报告指出全球劳动力市场趋于 employer-driven，offer acceptance rate 上升约 3 个百分点，整体 hiring success 上升约 4 个百分点；但招聘周期长、申请量高仍造成效率压力。AI 的价值在于提高速度和候选人体验，但不能简单叠加在复杂旧流程上。</p>
+  <p>真正应该问的是：需求确认、画像、搜索、筛选、沟通、安排、面试资料、评估、offer、入职能否被重新设计成 human-agent workflow。</p>
+  <p>对 HRIS 项目而言，最值得做的是把「候选人状态机」与 Agent 能力结合，而不是单独增加一个 AI 页面。</p>
+
+  <h3>3.4 Chapter 3：绩效和学习必须重新形成闭环</h3>
+  <p>24% 的员工表示过去没有参加培训；超过一半员工的正式反馈一年一次或没有。员工和 HR 对反馈频率也存在明显认知差距。</p>
+  <p>未来系统需要知道员工当前能力、目标岗位能力、技能差距、学习行为、绩效表现和职业路径，而不是把绩效、培训、晋升做成互不相干的模块。</p>
+  <p>一个成熟的 AI+HR 闭环应是：目标 → 工作行为/结果 → 持续反馈 → 技能识别 → 差距分析 → 个性化学习 → 技能证明 → 职业机会 → 新目标。</p>
+
+  <h3>3.5 Chapter 4：员工体验从「福利项目」回到「基本工作体验」</h3>
+  <p>员工留下来的主要因素包括薪酬 52%、工作生活平衡 46%、工作安全感 45%。报告认为，在经济不确定环境下，EX 不应只靠更多项目堆叠，而应加强公平、透明和可持续工作负荷。</p>
+  <p>因此，AI Employee Experience 的目标不应只是「更智能的 FAQ」，而是减少员工在制度、流程、系统之间反复跳转的摩擦，同时提高透明度。</p>
+
+  <h3>3.6 Chapter 5：这是 HRIS 从业者最应该精读的部分</h3>
+  <p>麦肯锡指出，超过四分之三 HR function 仍主要沿经典 Ulrich 模型组织；调查中 32% 仍主要采用 Ulrich，34% 表示至少部分采用 agile HR，真正高度 agile 的组织仍是少数；machine-powered model 的比例约 15%。</p>
+  <p>报告提出三类关键能力：People Strategist、People Scientist、People Technologist，并强调这些人应在 product squads 中协作。</p>
+  <p>麦肯锡引用其研究称约三分之二当前 HR tasks 具有自动化潜力，但真正能够持续、例行地把新技术纳入 HR 的公司约只有 5%。</p>
+  <blockquote>职业信号：未来稀缺的不是「会使用一个 AI 工具的人」，而是能把 HR domain knowledge、流程、数据、技术和 change management 连接起来的人。</blockquote>
+
+  <h2>四、《Escaping the pilot trap》：Agentic HR 最重要的一篇</h2>
+  <p>这篇 2026 年 8 月文章把前面的趋势进一步落到 operating model。麦肯锡提出：不要把 Agentic HR 管成一串孤立 pilot；应先定义 2030 human-agent operating model，再从 North Star 向后倒推实施。</p>
+
+  <h3>4.1 什么是 Pilot Trap？</h3>
+  <p>传统数字化的「先小规模试点」在 Agent 时代可能产生新风险：一个 HR 专员很快就能用低代码配置 Agent，组织自然会快速产生大量局部 Agent。没有架构、权限、数据和治理，这些局部方案会逐渐固化成互不兼容的 shadow stack。</p>
+  <p>所以问题不再是「要不要 pilot」，而是每个 pilot 是否都属于一个明确的 North Star。</p>
+
+  <h3>4.2 North Star 要回答三组矛盾</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>矛盾</th><th>要回答的问题</th><th>HRIS/AI 项目含义</th></tr></thead>
+      <tbody>
+        <tr><td>平台归属</td><td>HR 拥有 Agent，但企业基础设施谁负责？</td><td>HR、IT、Security、Data 的边界必须先定义</td></tr>
+        <tr><td>投资 vs 监控</td><td>个性化到什么程度才不会变成 surveillance？</td><td>员工数据、解释性、权限和透明度必须设计进产品</td></tr>
+        <tr><td>自动化 vs 人才成长</td><td>Agent 拿走工作后，人类如何获得经验？</td><td>重新设计培养路径、entry-level work 和 apprenticeship</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4.3 三种进入方式：不是三种战略</h3>
+  <ul>
+    <li><strong>Bottom-up use cases</strong>：从痛点和 quick wins 进入；速度快，但最容易陷入孤岛。</li>
+    <li><strong>End-to-end process redesign</strong>：挑 payroll、onboarding、document、query 等流程整体重构，更容易证明价值。</li>
+    <li><strong>Domain-by-domain reinvention</strong>：招聘、L&amp;D、绩效、total rewards、HRBP 等整个 domain 从零重建，要求最高，但变革最彻底。</li>
+  </ul>
+  <p>三种方式都可以作为入口，但都必须服从同一个 North Star。</p>
+
+  <h3>4.4 2030 HR 的工作时间会怎么变化？</h3>
+  <p>麦肯锡给出的示意性未来模型值得关注：传统 HR 大约 40% 时间用于 operational delivery、30% 用于 program/project、15% ad hoc、15% strategic engagement/innovation；Agentic HR 中人的 operational delivery 可能缩到约 5%，program/project 约 10%，ad hoc 约 15%，strategic engagement/innovation 达到约 50%，另有约 20% 用于 agentic capability management。</p>
+  <p>更准确的理解不是「HR 被自动化」，而是：人的工作从执行流程转向设计、监督、判断和管理 Agent。</p>
+
+  <h3>4.5 新型 HR 角色</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>角色</th><th>核心职责</th><th>能力组合</th></tr></thead>
+      <tbody>
+        <tr><td>People Strategist</td><td>业务战略 → people priorities → 人/Agent 配置</td><td>业务、组织、人才战略</td></tr>
+        <tr><td>People Technologist</td><td>设计和维护 agentic operating backbone</td><td>HR + workflow + data + AI + integration</td></tr>
+        <tr><td>People Scientist</td><td>风险、偏差、数据、实验、复杂决策</td><td>People analytics + governance + evidence</td></tr>
+        <tr><td>Flow-to-work Generalist</td><td>按优先级动态支援项目</td><td>综合 HR 能力 + 项目/变革</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>其中 People Technologist 与 HRIS/数字化转型最接近。更偏产品/技术的新角色还包括 capability builder、agent integrator、agent orchestrator。</p>
+
+  <h2>五、《The State of Organizations 2026》：为什么 HR 的变化不是 HR 自己的事</h2>
+  <p>这份 74 页报告覆盖 10,000+ 高管、15 国、16 行业。它把 2026 年组织变化归纳为三股力量：technology disruption、economic disruption、workforce shifts。</p>
+
+  <h3>5.1 组织变化地图</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>主题</th><th>精读重点</th><th>对 HR/HRIS 的意义</th></tr></thead>
+      <tbody>
+        <tr><td>AI-enabled organization</td><td>从零散 AI use case 转向 AI-first operating model</td><td>HR 必须与企业 AI 架构对齐</td></tr>
+        <tr><td>Humans + AI agents</td><td>重新分配任务、能力和责任</td><td>岗位 → 任务 → 能力</td></tr>
+        <tr><td>AI 重写 shared services</td><td>SSC → AI-native GBS</td><td>HR 服务交付模式重构</td></tr>
+        <tr><td>Geopolitical context</td><td>全球化、区域化与人才配置弹性</td><td>全球 HRIS 与组织设计</td></tr>
+        <tr><td>Structure → Flow</td><td>流程比组织架构更决定生产率</td><td>E2E 流程重构</td></tr>
+        <tr><td>Focus on the core</td><td>人才和预算动态流向关键优先级</td><td>能力资源配置</td></tr>
+        <tr><td>Performance edge</td><td>人和绩效必须一起管理</td><td>绩效/人才闭环</td></tr>
+        <tr><td>D&amp;I</td><td>从口号转向可衡量的业务影响</td><td>数据与治理</td></tr>
+        <tr><td>Leadership</td><td>领导力从外部控制转向 inside-out</td><td>领导力能力模型</td></tr>
+        <tr><td>Business as change</td><td>变革成为持续状态</td><td>HR transformation 持续运营</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>5.2 AI-enabled organization：AI adoption ≠ AI impact</h3>
+  <p>报告给出的关键数字：88% 的组织已经在某种程度上采用/部署 AI，但 86% 的领导者认为组织还没有准备好把 AI 用于日常运营；只有 14% 表示领导层持续、有明确战略地推动 AI adoption。</p>
+  <p>AI 规模化的主要障碍包括对 AI 本身的担忧 46%、监管/伦理/法律 44%、组织挑战 39%。</p>
+  <p>关键不是「AI adoption rate」，而是 double transformation：技术变革 + 组织变革。真正的价值来自重新设计 functions 和 end-to-end workflows。</p>
+
+  <h3>5.3 Humans + AI agents：重新拆解工作</h3>
+  <p>Agent 不应该机械地塞进现有流程；应从流程中拆出离散活动，再基于经济性、伦理和技术成熟度决定哪些由人、哪些由 Agent、哪些由人机协作完成。</p>
+  <p>这与 HR Monitor 的 task/capability-based workforce planning 直接相连：未来组织设计的最小单位正在从岗位转向任务与能力。</p>
+
+  <h3>5.4 Shared services：从成本中心走向 AI-native business services</h3>
+  <p>84% 的受访者计划在未来 1–2 年扩大 shared services 范围，但只有 6% 的 business service leaders 已经在多个 use case 上实现技术的完整收益；超过 40% 还没有开始系统性采用相关技术。</p>
+  <p>最大的扩展障碍包括与现有系统集成 42% 和变革阻力 41%。这对 HRIS 特别重要：AI 的瓶颈往往不是模型，而是 integration、data、process 和 change。</p>
+
+  <h3>5.5 Structure → Flow：为什么「换组织架构」已经不够</h3>
+  <p>报告强调，突破 productivity ceiling 的关键不是不停画新的 org chart，而是简化、统一和同步企业流程，消除重复、打通信息流、简化决策并自动化。</p>
+  <p>这对 HRIS 实施方法有直接启示：不要把「把旧流程搬进新系统」误认为数字化。真正的数字化应该先问：这个流程是否还应该存在？哪些步骤可以删除？哪些决策可以自动化？</p>
+
+  <h3>5.6 Business as change：AI 转型不是一次项目</h3>
+  <p>变革不再是 episodic，而是 continuous；组织需要把持续改变本身变成能力。</p>
+  <p>因此 HR AI Transformation 不应该以「系统上线」作为终点，而应该建立持续的 use-case backlog、agent governance、数据质量、ROI measurement、员工反馈和迭代机制。</p>
+
+  <h2>六、三份报告合并后的统一模型</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>层级</th><th>核心问题</th><th>典型产物</th></tr></thead>
+      <tbody>
+        <tr><td>L1 企业战略</td><td>企业未来靠什么创造价值？</td><td>Business North Star</td></tr>
+        <tr><td>L2 Operating Model</td><td>人、Agent、流程如何分工？</td><td>Human-Agent Operating Model</td></tr>
+        <tr><td>L3 HR Operating Model</td><td>HR 如何组织能力和资源？</td><td>People Strategist/Technologist/Scientist + Product Squads</td></tr>
+        <tr><td>L4 Workflow</td><td>具体流程如何重新设计？</td><td>E2E workflow + Agent orchestration</td></tr>
+        <tr><td>L5 Technology/Data</td><td>系统如何支撑？</td><td>HRIS + integration + data backbone + AI layer</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>过去 HRIS 往往从 L5 开始：「我们要上什么系统？」；麦肯锡 2026 的逻辑恰恰要求从 L1/L2 开始向下倒推。</p>
+
+  <h2>七、对 AI + HR 项目的直接翻译</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>阶段</th><th>你应该做什么</th><th>最终形成什么</th></tr></thead>
+      <tbody>
+        <tr><td>1 现状诊断</td><td>梳理入离职、绩效、考勤、薪资、招聘、培训的 E2E 流程</td><td>Pain point + baseline</td></tr>
+        <tr><td>2 North Star</td><td>定义未来 HR 服务模式、人/Agent 边界</td><td>Target operating model</td></tr>
+        <tr><td>3 流程重构</td><td>先删、再合并、再自动化，最后才选 AI</td><td>Future-state workflow</td></tr>
+        <tr><td>4 数据底座</td><td>统一员工、岗位、组织、技能、流程状态等关键数据</td><td>HR data backbone</td></tr>
+        <tr><td>5 Agent 场景</td><td>挑高频、规则清晰、数据成熟的流程</td><td>Agent use-case portfolio</td></tr>
+        <tr><td>6 Governance</td><td>权限、人工兜底、日志、质量、风险、数据使用</td><td>AI governance</td></tr>
+        <tr><td>7 Pilot</td><td>选择一个 E2E 流程形成可量化样板</td><td>Proof of value</td></tr>
+        <tr><td>8 Scale</td><td>复用平台能力而非复制孤立机器人</td><td>Enterprise rollout</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>八、对 HRIS / AI+HR 从业者的价值定位</h2>
+  <p>不要把自己描述成「一个做 HR 系统的人」。更准确的能力模型是：HR domain knowledge + HRIS + process redesign + project delivery + AI transformation。这正好落在 People Technologist 的交叉地带。</p>
+  <p>项目故事可以组织成：业务问题 → 当前流程 → 数据/系统约束 → 未来流程 → 人与 AI 如何分工 → 系统如何实现 → 如何衡量 ROI → 如何推广。</p>
+  <p>这比单纯讲「我用了什么 AI 工具」更接近企业真正关心的 transformation 能力。</p>
+
+  <h2>九、12 个关键词</h2>
+  <p>
+    <span class="kw">Strategic workforce planning</span>
+    <span class="kw">Skills intelligence / skills graph</span>
+    <span class="kw">Task-based workforce planning</span>
+    <span class="kw">Human–agent collaboration</span>
+    <span class="kw">Agentic HR</span>
+    <span class="kw">North Star-back</span>
+    <span class="kw">End-to-end workflow redesign</span>
+    <span class="kw">AI-native shared services / GBS</span>
+    <span class="kw">Unified data backbone</span>
+    <span class="kw">Flow-to-work</span>
+    <span class="kw">People Technologist</span>
+    <span class="kw">Continuous transformation / Business as change</span>
+  </p>
+
+  <h2>十、最值得记住的 10 句话</h2>
+  <div class="quotes">
+    <div class="q"><span class="n">1</span><span class="t">AI 转型不是采购 AI，而是重新设计 work。</span></div>
+    <div class="q"><span class="n">2</span><span class="t">岗位不是未来 workforce planning 的唯一单位，task 和 capability 会越来越重要。</span></div>
+    <div class="q"><span class="n">3</span><span class="t">HR 既要帮助企业做 AI transformation，也必须先改造自己。</span></div>
+    <div class="q"><span class="n">4</span><span class="t">AI pilot 越多不等于 AI transformation 越成熟。</span></div>
+    <div class="q"><span class="n">5</span><span class="t">每一个 pilot 都应该能够回答：它属于哪个 North Star？</span></div>
+    <div class="q"><span class="n">6</span><span class="t">HRIS 的未来竞争力越来越取决于 integration、data 和 workflow orchestration。</span></div>
+    <div class="q"><span class="n">7</span><span class="t">Shared services 正从 transactional process hub 走向 AI-native business services。</span></div>
+    <div class="q"><span class="n">8</span><span class="t">人的价值不会简单等于「无法自动化的工作」，而是判断、关系、教练、协调和对结果负责。</span></div>
+    <div class="q"><span class="n">9</span><span class="t">Agentic HR 的重要新能力是 agent ownership，而不只是 prompt。</span></div>
+    <div class="q"><span class="n">10</span><span class="t">真正的终点不是「HR 上线了 AI」，而是 HR 能持续设计、运营和治理 human-agent systems。</span></div>
+  </div>
+
+  <h2>十一、官方来源</h2>
+  <div class="src">
+    <ol>
+      <li>McKinsey — HR Monitor 2026: A turning point for the people function（44 pages，2026-06-08）</li>
+      <li>McKinsey — Escaping the pilot trap: Building HR for the agentic era（2026-08-04）</li>
+      <li>McKinsey — The State of Organizations 2026: Three tectonic forces that are reshaping organizations（74 pages，2026-02）</li>
+    </ol>
+    <p style="margin-top:14px;font-size:.88rem;color:var(--stone)">本文为中文精读笔记，最终引用数字时应以 McKinsey 官方原报告为准。</p>
+  </div>
+
+</article>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Lowell · 个人博客</div>
+</footer>
+
+</body>
+</html>

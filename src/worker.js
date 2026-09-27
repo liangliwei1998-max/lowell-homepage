@@ -9,6 +9,12 @@ export default {
     if (path === "/api/stats") {
       return getStats(env);
     }
+    if (path === "/api/search") {
+      return semanticSearch(url, env);
+    }
+    if (path === "/api/reindex" && request.method === "POST") {
+      return rebuildIndex(request, env);
+    }
 
     // 其他路径交给静态资源（assets），未命中时由 not_found_handling 兜底
     return env.ASSETS.fetch(request);
@@ -59,6 +65,72 @@ async function getStats(env) {
   ).all();
 
   return json({ total: total.c, education: education.results, city: city.results });
+}
+
+// ---- 语义搜索（Workers AI embedding + Vectorize）----
+
+const EMBED_MODEL = "@cf/qwen/qwen3-embedding-0.6b";
+
+function profileText(c) {
+  const parts = [
+    c.expected_position,
+    c.education,
+    c.city,
+    c.tags,
+    c.work_status,
+    c.work_years ? `${c.work_years}年经验` : "",
+  ];
+  return parts.filter(Boolean).join("，");
+}
+
+async function embed(env, text) {
+  const r = await env.AI.run(EMBED_MODEL, { text });
+  return Array.from(r.data[0]);
+}
+
+async function rebuildIndex(request, env) {
+  const key = request.headers.get("X-Index-Key") || "";
+  if (key !== env.INDEX_SECRET) {
+    return new Response("unauthorized", { status: 401 });
+  }
+  const { results } = await env.DB.prepare("SELECT * FROM candidates ORDER BY id").all();
+  const vectors = [];
+  let dims = 0;
+  for (const c of results) {
+    const text = profileText(c);
+    const values = await embed(env, text);
+    dims = values.length;
+    vectors.push({
+      id: String(c.id),
+      values,
+      metadata: {
+        id: c.id,
+        position: c.expected_position || "",
+        city: c.city || "",
+        education: c.education || "",
+      },
+    });
+  }
+  const up = await env.VECTORIZE.upsert(vectors);
+  return json({ indexed: vectors.length, dims, upsert: up });
+}
+
+async function semanticSearch(url, env) {
+  const q = (url.searchParams.get("q") || "").trim();
+  if (!q) {
+    return json({ query: "", matches: [] });
+  }
+  const values = await embed(env, q);
+  const result = await env.VECTORIZE.query(values, { topK: 10, returnMetadata: true });
+
+  const rows = [];
+  for (const m of result.matches) {
+    const c = await env.DB.prepare("SELECT * FROM candidates WHERE id = ?").bind(m.metadata.id).first();
+    if (c) {
+      rows.push({ ...c, score: Math.round(m.score * 1000) / 1000 });
+    }
+  }
+  return json({ query: q, matches: rows });
 }
 
 function json(obj) {

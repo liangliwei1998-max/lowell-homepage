@@ -71,6 +71,26 @@
   .pager button:disabled{opacity:.4;cursor:not-allowed}
   .pager .info{color:var(--stone)}
 
+  /* 语义搜索 */
+  .semantic{background:var(--ivory);border:1px solid var(--line-soft);border-radius:14px;padding:24px 26px;margin-bottom:8px}
+  .semantic h3{font-family:Georgia,"Songti SC","STSong","SimSun",serif;font-weight:500;font-size:1.1rem;color:var(--terracotta);margin-bottom:6px}
+  .semantic .hint{color:var(--stone);font-size:.85rem}
+  .s-form{display:flex;gap:10px;margin-top:14px}
+  .s-form input{flex:1;background:var(--parchment);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:10px 14px;font-size:.92rem;outline:none;font-family:inherit}
+  .s-form input:focus{border-color:var(--terracotta)}
+  .s-form button{background:var(--terracotta);color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer;font-size:.92rem;font-family:inherit}
+  .s-form button:hover{opacity:.9}
+  .sem-results{margin-top:16px}
+  .sem-item{padding:12px 0;border-top:1px solid var(--line-soft)}
+  .sem-item:first-child{border-top:none}
+  .sem-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .sem-head b{font-weight:600}
+  .sem-head .score{color:var(--terracotta);font-size:.82rem;font-variant-numeric:tabular-nums}
+  .sem-meta{color:var(--stone);font-size:.85rem;margin-top:3px}
+  .sem-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+  .sem-tags span{font-size:.72rem;color:var(--olive);background:var(--sand);padding:2px 8px;border-radius:100px}
+  .sem-loading{color:var(--stone);font-size:.9rem;padding:8px 0}
+
   footer{padding:30px 0 54px;color:var(--stone);font-size:.85rem;text-align:center}
   @media (max-width:600px){table{font-size:.8rem}th,td{padding:8px 8px}}
 </style>
@@ -107,6 +127,18 @@
         <h3>城市分布</h3>
         <div id="city-bars"></div>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="semantic">
+      <h3>语义搜索（AI）</h3>
+      <p class="hint">用自然语言描述要找的人，不用管关键词怎么匹配。试试「会 Rhino 的工业设计师」。</p>
+      <div class="s-form">
+        <input type="text" id="semantic-q" placeholder="例如：会 Rhino 和 Creo 的工业设计师、三年经验的机械工程师…">
+        <button id="semantic-btn">搜索</button>
+      </div>
+      <div class="sem-results" id="semantic-results"></div>
     </div>
   </section>
 
@@ -205,6 +237,32 @@ $("city").addEventListener("change", e => { state.city = e.target.value; state.p
 $("education").addEventListener("change", e => { state.education = e.target.value; state.page = 1; loadRows(); });
 $("prev").addEventListener("click", () => { state.page--; loadRows(); });
 $("next").addEventListener("click", () => { state.page++; loadRows(); });
+
+async function semanticSearch(){
+  const q = $("semantic-q").value.trim();
+  if(!q) return;
+  const box = $("semantic-results");
+  box.innerHTML = '<div class="sem-loading">搜索中…</div>';
+  try{
+    const r = await fetch("/api/search?q=" + encodeURIComponent(q));
+    const d = await r.json();
+    if(!d.matches || !d.matches.length){
+      box.innerHTML = '<div class="sem-loading">没有语义相近的候选人，换个说法试试。</div>';
+      return;
+    }
+    box.innerHTML = d.matches.map(m => `
+      <div class="sem-item">
+        <div class="sem-head"><b>${m.expected_position || "—"}</b><span class="score">相似度 ${Math.round(m.score*100)}%</span></div>
+        <div class="sem-meta">${gender(m.gender)} · ${m.education||"—"} · ${m.city||"—"} · ${num(m.work_years)}年经验</div>
+        ${m.tags ? `<div class="sem-tags">${m.tags.split(",").filter(Boolean).slice(0,6).map(t=>`<span>${t}</span>`).join("")}</div>` : ""}
+      </div>`).join("");
+  }catch(e){
+    box.innerHTML = '<div class="sem-loading">搜索出错，请稍后再试。</div>';
+  }
+}
+
+$("semantic-btn").addEventListener("click", semanticSearch);
+$("semantic-q").addEventListener("keydown", e => { if(e.key === "Enter") semanticSearch(); });
 
 loadStats();
 loadRows();

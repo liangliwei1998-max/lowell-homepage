@@ -8,11 +8,20 @@
     "binding": "ASSETS",
     "not_found_handling": "single-page-application"
   },
+  "ai": {
+    "binding": "AI"
+  },
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "lowell-homepage-db",
       "database_id": "bf02922c-7e71-4ce4-829b-1d5292fd87a4"
+    }
+  ],
+  "vectorize": [
+    {
+      "binding": "VECTORIZE",
+      "index_name": "candidate-embeddings"
     }
   ]
 }

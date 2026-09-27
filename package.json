@@ -1,0 +1,12 @@
+{
+  "name": "lowell-homepage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "梁黎伟（Lowell）个人主页",
+  "scripts": {
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.141.0"
+  }
+}
